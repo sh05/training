@@ -26,6 +26,8 @@ RUN apt update && \
     matplotlib \
     Pillow \
     gensim \
+    torch \
+    torchvision \
     sumy \
     tinysegmenter \
     tqdm \

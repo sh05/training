@@ -1,0 +1,10 @@
+version: "2"
+services:
+  training_note:
+    command: /bin/bash -c "jupyter notebook --ip=0.0.0.0 --allow-root"
+    build:
+      context: ./docker
+    volumes:
+      - "$PWD/:/home/work"
+    ports:
+      - "8888:8888"

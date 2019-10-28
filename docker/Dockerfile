@@ -30,9 +30,11 @@ RUN apt update && \
     torchvision \
     sumy \
     tinysegmenter \
+    "https://github.com/megagonlabs/ginza/releases/download/latest/ginza-latest.tar.gz" \
     tqdm \
     ipython[all] \
     jupyter && \
+    pip install -U scikit-learn && \
     pip install jupyter-contrib-nbextensions && \
     jupyter contrib nbextension install --user && \
     pip install jupyter-nbextensions-configurator && \
@@ -53,5 +55,4 @@ RUN apt update && \
     # echo "CodeMirror.Vim.map('k', '<Plug>(vim-binding-gk)', 'normal');" >> ~/.jupyter/custom/custom.js && \
     # echo "CodeMirror.Vim.map('gj', '<Plug>(vim-binding-j)', 'normal');" >> ~/.jupyter/custom/custom.js && \
     # echo "CodeMirror.Vim.map('gk', '<Plug>(vim-binding-k)', 'normal');" >> ~/.jupyter/custom/custom.js && \
-    echo "});" >> ~/.jupyter/custom/custom.js && \
-    pip install -U scikit-learn
+    echo "});" >> ~/.jupyter/custom/custom.js

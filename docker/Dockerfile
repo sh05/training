@@ -1,8 +1,8 @@
 FROM python:3.7
 WORKDIR /home/work
-RUN apt update && \
-    apt install -y --no-install-recommends apt-utils && \
-    apt install -y \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends apt-utils && \
+    apt-get install -y \
     sudo \
     swig \
     curl \
@@ -24,8 +24,10 @@ RUN apt update && \
     wordcloud \
     sentencepiece \
     matplotlib \
+    japanize-matplotlib \
     Pillow \
     gensim \
+    pydot \
     torch \
     torchvision \
     sumy \

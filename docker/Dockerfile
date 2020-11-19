@@ -35,16 +35,31 @@ RUN apt-get install -y \
     sumy \
     tinysegmenter \
     "https://github.com/megagonlabs/ginza/releases/download/latest/ginza-latest.tar.gz" \
-    tqdm 
-RUN apt-get install -y \
-    nodejs \
-    npm && \
-    pip install jupyterlab==1.0 && \
-    jupyter serverextension enable --py jupyterlab && \
-    jupyter labextension install jupyterlab_vim
-RUN mkdir -p /home/jovyan/.jupyter/lab/user-settings/@jupyterlab/apputils-extension && \
-    echo '{"theme":"JupyterLab Dark"}' > \
-    /home/jovyan/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/themes.jupyterlab-settings
+    tqdm \
+    ipython[all] \
+    jupyter && \
+    pip install -U scikit-learn && \
+    pip install jupyter-contrib-nbextensions && \
+    jupyter contrib nbextension install --user && \
+    pip install jupyter-nbextensions-configurator && \
+    jupyter nbextensions_configurator enable --user && \
+    mkdir -p $(jupyter --data-dir)/nbextensions && \
+    git clone https://github.com/lambdalisue/jupyter-vim-binding $(jupyter --data-dir)/nbextensions/vim_binding && \
+    jupyter nbextension enable vim_binding/vim_binding && \
+    mkdir -p ~/.jupyter/custom/ && \
+    touch ~/.jupyter/custom/custom.js && \
+    echo " // Configure CodeMirror Keymap" >> ~/.jupyter/custom/custom.js && \
+    echo "require([" >> ~/.jupyter/custom/custom.js && \
+    echo "        'nbextensions/vim_binding/vim_binding',   // depends your installation" >> ~/.jupyter/custom/custom.js && \
+    echo "], function() {" >> ~/.jupyter/custom/custom.js && \
+    echo "// Map jj to <Esc>" >> ~/.jupyter/custom/custom.js && \
+    echo "CodeMirror.Vim.map('jj', '<Esc>', 'insert');" >> ~/.jupyter/custom/custom.js && \
+# echo "// Swap j/k and gj/gk (Note that <Plug> mappings)" >> ~/.jupyter/custom/custom.js && \
+# echo "CodeMirror.Vim.map('j', '<Plug>(vim-binding-gj)', 'normal');" >> ~/.jupyter/custom/custom.js && \
+# echo "CodeMirror.Vim.map('k', '<Plug>(vim-binding-gk)', 'normal');" >> ~/.jupyter/custom/custom.js && \
+# echo "CodeMirror.Vim.map('gj', '<Plug>(vim-binding-j)', 'normal');" >> ~/.jupyter/custom/custom.js && \
+# echo "CodeMirror.Vim.map('gk', '<Plug>(vim-binding-k)', 'normal');" >> ~/.jupyter/custom/custom.js && \
+    echo "});" >> ~/.jupyter/custom/custom.js
 # Install CRF++
 RUN wget -O /tmp/CRF++-0.58.tar.gz "https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7QVR6VXJ5dWExSTQ" \
   && cd /tmp \

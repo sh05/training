@@ -1,7 +1,7 @@
 version: "2"
 services:
   nlp_note:
-    command: /bin/bash -c "jupyter lab --ip=0.0.0.0 --allow-root --port=18888"
+    command: /bin/bash -c "jupyter notebook --ip=0.0.0.0 --allow-root --port=18888"
     build:
       context: ./docker
     volumes:

@@ -1,8 +1,15 @@
 FROM python:3.7
 WORKDIR /home/work
+<<<<<<< HEAD
 RUN apt-get update && \
     apt-get install -y --no-install-recommends apt-utils && \
     apt-get install -y \
+=======
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends apt-utils
+RUN apt-get install -y \
+>>>>>>> 052c5727ce4c256861589401ff6a5ee3b9d52691
     sudo \
     swig \
     curl \
@@ -13,6 +20,9 @@ RUN apt-get update && \
     make \
     mecab \
     libmecab-dev \
+    default-jdk \
+    graphviz \
+    redis-server \
     mecab-ipadic-utf8 && \
     git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git &&\
     echo yes | ./mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n && \
@@ -27,9 +37,13 @@ RUN apt-get update && \
     japanize-matplotlib \
     Pillow \
     gensim \
+<<<<<<< HEAD
     pydot \
     torch \
     torchvision \
+=======
+    graphviz \
+>>>>>>> 052c5727ce4c256861589401ff6a5ee3b9d52691
     sumy \
     tinysegmenter \
     "https://github.com/megagonlabs/ginza/releases/download/latest/ginza-latest.tar.gz" \
@@ -52,11 +66,11 @@ RUN apt-get update && \
     echo "], function() {" >> ~/.jupyter/custom/custom.js && \
     echo "// Map jj to <Esc>" >> ~/.jupyter/custom/custom.js && \
     echo "CodeMirror.Vim.map('jj', '<Esc>', 'insert');" >> ~/.jupyter/custom/custom.js && \
-    # echo "// Swap j/k and gj/gk (Note that <Plug> mappings)" >> ~/.jupyter/custom/custom.js && \
-    # echo "CodeMirror.Vim.map('j', '<Plug>(vim-binding-gj)', 'normal');" >> ~/.jupyter/custom/custom.js && \
-    # echo "CodeMirror.Vim.map('k', '<Plug>(vim-binding-gk)', 'normal');" >> ~/.jupyter/custom/custom.js && \
-    # echo "CodeMirror.Vim.map('gj', '<Plug>(vim-binding-j)', 'normal');" >> ~/.jupyter/custom/custom.js && \
-    # echo "CodeMirror.Vim.map('gk', '<Plug>(vim-binding-k)', 'normal');" >> ~/.jupyter/custom/custom.js && \
+# echo "// Swap j/k and gj/gk (Note that <Plug> mappings)" >> ~/.jupyter/custom/custom.js && \
+# echo "CodeMirror.Vim.map('j', '<Plug>(vim-binding-gj)', 'normal');" >> ~/.jupyter/custom/custom.js && \
+# echo "CodeMirror.Vim.map('k', '<Plug>(vim-binding-gk)', 'normal');" >> ~/.jupyter/custom/custom.js && \
+# echo "CodeMirror.Vim.map('gj', '<Plug>(vim-binding-j)', 'normal');" >> ~/.jupyter/custom/custom.js && \
+# echo "CodeMirror.Vim.map('gk', '<Plug>(vim-binding-k)', 'normal');" >> ~/.jupyter/custom/custom.js && \
     echo "});" >> ~/.jupyter/custom/custom.js
 # Install CRF++
 RUN wget -O /tmp/CRF++-0.58.tar.gz "https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7QVR6VXJ5dWExSTQ" \
